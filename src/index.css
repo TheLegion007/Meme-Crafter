@@ -113,6 +113,15 @@ main {
   font-family: "Karla", sans-serif;
 }
 
+#btn-meme {
+  will-change: filter;
+  transition: filter .1s ease-out;
+}
+
+#btn-meme:hover {
+  filter: drop-shadow(0px 0px 50px #6ccd26ee);
+}
+
 .meme {
   position: relative;
   display: flex;

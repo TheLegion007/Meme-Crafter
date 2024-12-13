@@ -7,4 +7,4 @@ export default function Header() {
             <h1> Generate Your Meme ! </h1>
         </header>
     )
-}
+}               
