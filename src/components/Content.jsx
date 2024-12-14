@@ -40,20 +40,20 @@ export default function Main() {
     return (
         <main>
             <div className="form">
-                <label>Top Text
+                <label>
                     <input
                         type="text"
-                        placeholder="One does not simply work "
+                        placeholder="Enter Top Text "
                         name="topText"
                         onChange={handleChange}
                         value={meme.topText}
                     />
                 </label>
 
-                <label>Bottom Text
+                <label>
                     <input
                         type="text"
-                        placeholder="Walk into Mordor"
+                        placeholder="Enter Bottom Text"
                         name="bottomText"
                         onChange={handleChange}
                         value={meme.bottomText}
