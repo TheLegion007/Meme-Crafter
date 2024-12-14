@@ -19,7 +19,7 @@ main {
 .header {
   display: flex;
   align-items: center;
-  height: 65px;
+  height: 80px;
   border-radius: 5px;
   background: linear-gradient(90deg, #441752 1.18%, #A626D3 100%);
   color: white;

@@ -1,19 +1,39 @@
-import { useState } from "react"
+import { useEffect, useState } from 'react';
 
 export default function Main() {
     const [meme, setMeme] = useState({
-        topText: "One does not simply work ",
-        bottomText: "Walk into Mordor",
-        imageUrl: "http://i.imgflip.com/1bij.jpg"
+        topText: " Pineapple can't go on pizza, it's a fruit ", 
+        bottomText : " Tomato and olives are fruits ",
+        imageUrl: "https://i.imgflip.com/9drvzp.jpg"
     })
 
-    function handleChange(event) {
-        const value = event.currentTarget.value
-        console.log(value)
+    const [allMemes, setAllMemes] = useState([])
+    //console.log(allMemes)
 
-        setMeme(prev => ({
-            ...prev, 
-            topText : value
+    useEffect(() => {
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data => setAllMemes(data.data.memes))    
+    }, [])
+    
+    function getMemeImage() {
+        const  randomIndex = Math.floor(Math.random()* allMemes.length)
+        const newMemeUrl = allMemes[randomIndex].url
+        //console.log(newMemeUrl , " index : " , randomIndex );
+        setMeme((preValue)=>({
+            ...preValue,
+            imageUrl : newMemeUrl
+        }))
+        
+    }
+
+    function handleChange(event) {
+        const {value, name}  = event.currentTarget
+        //console.log(event.currentTarget)
+
+        setMeme(prevMeme => ({
+            ...prevMeme, 
+            [name] : value
         }))
     }
 
@@ -23,20 +43,23 @@ export default function Main() {
                 <label>Top Text
                     <input
                         type="text"
-                        placeholder={meme.topText}
+                        placeholder="One does not simply work "
                         name="topText"
                         onChange={handleChange}
+                        value={meme.topText}
                     />
                 </label>
 
                 <label>Bottom Text
                     <input
                         type="text"
-                        placeholder={meme.bottomText}
+                        placeholder="Walk into Mordor"
                         name="bottomText"
+                        onChange={handleChange}
+                        value={meme.bottomText}
                     />
                 </label>
-                <button id="btn-meme">Get a new meme image 🖼</button>
+                <button id="btn-meme" onClick={getMemeImage}>Get a new meme image 🖼</button>
             </div>
             <div className="meme">
                 <img src={meme.imageUrl} />
